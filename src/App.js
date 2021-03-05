@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
-function App() {
+import SignUp from "./authentication/signup"
+import LogIn from "./authentication/login"
+import ForgotPass from "./authentication/forgot-password"
+import UpdateProfile from "./authentication/update-profile"
+import AuthProvider from "./context/auth-context"
+import Profile from "./authentication/profile"
+import PrivateRoute from "./authentication/private-route"
+import Dashboard from "./components/dashboard"
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Router>
+      <Switch>
+        <AuthProvider>
+          <PrivateRoute exact path="/" component={Dashboard} redirect="/login" />
+          <PrivateRoute exact path="/folder/:folderId" component={Dashboard} redirect="/login" />
 
-export default App;
+          <PrivateRoute path="/user" component={Profile} redirect="/login"/>
+          <Route path="/signup" component={SignUp}/>
+          <Route path="/login" component={LogIn}/>
+          <Route path="/forgot-password" component={ForgotPass}/>
+          <Route path="/update-profile" component={UpdateProfile}/>
+        </AuthProvider>
+      </Switch>
+    </Router>   
+  )
+}
