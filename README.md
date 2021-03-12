@@ -14,9 +14,10 @@ A simple google drive clone made using react.js.
 ```    
 2. Make sure you have the latest version of node.js and npm installed. [You can check for newer versions on the official node.js website.](https://nodejs.org/en/)
 
-3. Navigate to the react-gdrive-clone folder
+3. Navigate to the react-gdrive-clone folder and install the dependencies
 ```
     cd react-gdrive-clone
+    npm i
 ```    
 4. Run the app
 ```
